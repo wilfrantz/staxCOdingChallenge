@@ -43,23 +43,20 @@ namespace stax
      * \return: Domain object.
      */
 
-    Domain Stax::loadData(std::map<std::string, std::map<std::string, std::string>> &dataMap)
+    Domain Stax::loadData(const std::map<std::string, std::string> &dataMap)
     {
         Domain domainData;
 
-        for (const auto &outer : dataMap)
+        for (const auto &data : dataMap)
         {
-            std::string entry = outer.first;
-            for (const auto &inner : outer.second)
-            {
-                // NOTE: Validate age input, set a default value is !> 0 or NAN
-                if (inner.first == "age")
-                    domainData.age = std::stoi(inner.second) >= 0 ? std::stoi(inner.second) : 0;
-                else if (inner.first == "name")
-                    domainData.name = inner.second;
-                else if (inner.first == "registrar")
-                    domainData.registrar = inner.second;
-            }
+            // NOTE: Validate age input, set a default value is !> 0 or NAN
+            if (data.first == "age")
+                domainData.age = std::stoi(data.second) >= 0 ? std::stoi(data.second) : 0;
+            else if (data.first == "name")
+                domainData.name = data.second;
+            else if (data.first == "registrar")
+                domainData.registrar = data.second;
+
         }
 
         return domainData;
@@ -68,9 +65,7 @@ namespace stax
     Node Stax::createNode(const Domain &domainObject)
     {
         NodePtr node = new Node;
-
         node->data = domainObject;
-
         return *node;
     }
 
@@ -82,10 +77,15 @@ namespace stax
         NodePtr current = head;
         while (current != nullptr)
         {
-            Domain *domain;
-            std::cout << "Domain: " << domain->name << std::endl;
-            std::cout << "Age: " << domain->age << std::endl;
-            std::cout << "Registrar: " << domain->registrar << std::endl;
+            // Retrieve domain data from the current node
+            Domain domain = current->data;
+
+            // Print domain information
+            std::cout << "Domain: " << domain.name << std::endl;
+            std::cout << "Age: " << domain.age << std::endl;
+            std::cout << "Registrar: " << domain.registrar << std::endl;
+
+            // Move to the next node
             current = current->next;
         }
         std::cout << std::endl;

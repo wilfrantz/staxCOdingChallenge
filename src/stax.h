@@ -29,7 +29,7 @@ namespace stax
 {
     struct Domain
     {
-        int age;
+        int age = 0;
         std::string name;
         std::string registrar;
     };
@@ -42,6 +42,7 @@ namespace stax
     };
 
     typedef Node *NodePtr;
+    typedef Domain *DomainPtr;
     class Stax
     {
     public:
@@ -50,7 +51,7 @@ namespace stax
         void printList();
         void removeNode(const NodePtr node);
         Node createNode(const Domain &domainObject);
-        Domain loadData(std::map<std::string, std::map<std::string, std::string>> &data);
+        Domain loadData(const std::map<std::string, std::string> &data);
 
         inline void insertAtEnd(NodePtr node)
         {
