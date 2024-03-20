@@ -61,7 +61,7 @@ namespace stax
         // Function to insert a new node at the end of the list
         inline void insertAtBeginning(NodePtr node)
         {
-            node->next == nullptr;
+            node->next = nullptr;
             if (head == nullptr)
             {
                 node->prev = nullptr;

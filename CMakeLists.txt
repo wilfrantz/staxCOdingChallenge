@@ -16,11 +16,11 @@ set(SOURCE_FILES
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-# Include directories
-target_include_directories(${PROJECT_NAME}
-    PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+# # Include directories
+# target_include_directories(${PROJECT_NAME}
+#     PUBLIC
+#     ${CMAKE_CURRENT_SOURCE_DIR}/include
+# )
 
 # Set the build type to Debug if not explicitly set
 if(NOT CMAKE_BUILD_TYPE)

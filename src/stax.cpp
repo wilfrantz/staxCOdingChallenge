@@ -79,10 +79,13 @@ namespace stax
      */
     void Stax::printList()
     {
-        Node *current = head;
+        NodePtr current = head;
         while (current != nullptr)
         {
-            std::cout << current->data << " ";
+            Domain *domain;
+            std::cout << "Domain: " << domain->name << std::endl;
+            std::cout << "Age: " << domain->age << std::endl;
+            std::cout << "Registrar: " << domain->registrar << std::endl;
             current = current->next;
         }
         std::cout << std::endl;

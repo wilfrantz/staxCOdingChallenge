@@ -13,6 +13,7 @@ int main()
     const Domain data = stax.loadData(domainData);
     Node node = stax.createNode(data);
     stax.insertAtBeginning(&node);
+    stax.printList();
 
-    return (EXIT_SUCCESS);
+        return (EXIT_SUCCESS);
 }
