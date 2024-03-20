@@ -1,14 +1,21 @@
 
 #include "stax.h"
 
-
 struct Node;
 namespace stax
 {
     /** Add nodes to the list
      *
      */
-    void Stax::addNode(const Node &domainData) {}
+    void Stax::addNode(const Node &domainData)
+    {
+        std::map<std::string, std::string> domainData{
+            {"age", "19"},
+            {"name", "dede.dev"},
+            {"registrar", "Godaddy LLC"}};
+
+        Domain domain = loadData();
+    }
 
     /** Remove nodes to the list
      *
@@ -47,31 +54,41 @@ namespace stax
      * \param: domain's age, name and registrar info
      * \return: Domain object.
      */
-    Domain loadData(int &age, std::string &name, std::string &registrar)
+
+    Domain loadData(std::map<std::string, std::map<std::string, std::string>> &dataMap)
     {
         Domain domainData;
 
-        // Validate age input
-        if (age >= 0)
+        for (const auto &outer : dataMap)
         {
-            domainData.age = age;
+            std::string entry = outer.first;
+            for (const auto &inner : outer.second)
+            {
+                // NOTE: Validate age input, set a default value is !> 0 or NAN
+                if (inner.first == "age")
+                    domainData.age = std::stoi(inner.second) >= 0 ? std::stoi(inner.second) : 0;
+                else if (inner.first == "name")
+                    domainData.name = inner.second;
+                else if (inner.first == "registrar")
+                    domainData.registrar = inner.second;
+            }
         }
-        else
-        {
-            // NOTE Handle invalid age input, set to a default value or throw an exception
-            std::cerr << "Invalid age input: " << age << ". Setting age to 0." << std::endl;
-            domainData.age = 0;
-        }
-
-        domainData.name = name;
-        domainData.registrar = registrar;
 
         return domainData;
     }
 
+    Node Stax::createNode(const Domain &domainObject)
+    {
+        NodePtr node = new Node;
+
+        node->data = domainObject;
+
+        return *node;
+    }
+
     /** Print domain data to stdout
-     * 
-    */
+     *
+     */
     void Stax::printDomain(const Domain &domain)
     {
         std::cout << "Domain: " << domain.name << "\n"
