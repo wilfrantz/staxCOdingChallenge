@@ -31,7 +31,7 @@ namespace stax
     {
         int age;
         std::string name;
-        std::string registrar; 
+        std::string registrar;
     };
 
     struct Node
@@ -47,12 +47,10 @@ namespace stax
     public:
         Stax() : head(nullptr){};
 
-        void addData();
-        void removeNode();
+        void printList();
         void removeNode(const NodePtr node);
-        void addNode(const Node &domainData);
-        void printDomain(const Domain &domain); 
         Node createNode(const Domain &domainObject);
+        Domain loadData(std::map<std::string, std::map<std::string, std::string>> &data);
 
         inline void insertAtEnd(NodePtr node)
         {
@@ -80,8 +78,6 @@ namespace stax
             last->next = head;
             node->prev = last;
         }
-
-        Domain loadData(std::map<std::string, std::map<std::string, std::string>> &data);
 
     private:
         NodePtr head;

@@ -4,18 +4,6 @@
 struct Node;
 namespace stax
 {
-    /** Add nodes to the list
-     *
-     */
-    void Stax::addNode(const Node &domainData)
-    {
-        std::map<std::string, std::string> domainData{
-            {"age", "19"},
-            {"name", "dede.dev"},
-            {"registrar", "Godaddy LLC"}};
-
-        Domain domain = loadData();
-    }
 
     /** Remove nodes to the list
      *
@@ -55,7 +43,7 @@ namespace stax
      * \return: Domain object.
      */
 
-    Domain loadData(std::map<std::string, std::map<std::string, std::string>> &dataMap)
+    Domain Stax::loadData(std::map<std::string, std::map<std::string, std::string>> &dataMap)
     {
         Domain domainData;
 
@@ -89,10 +77,14 @@ namespace stax
     /** Print domain data to stdout
      *
      */
-    void Stax::printDomain(const Domain &domain)
+    void Stax::printList()
     {
-        std::cout << "Domain: " << domain.name << "\n"
-                  << "Age: " << domain.age << "\n"
-                  << "Registrar: " << domain.registrar << std::endl;
+        Node *current = head;
+        while (current != nullptr)
+        {
+            std::cout << current->data << " ";
+            current = current->next;
+        }
+        std::cout << std::endl;
     }
 }
