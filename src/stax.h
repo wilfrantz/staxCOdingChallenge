@@ -25,33 +25,37 @@
 
 namespace stax
 {
+    struct Domain
+    {
+        int age;
+        std::string name;
+        std::string registrar; 
+    };
+
+    struct Node
+    {
+        Node *prev;
+        Domain data;
+        Node *next;
+    };
+
+    typedef Node *NodePtr;
     class Stax
     {
     public:
         Stax(){};
 
-        struct Domain
-        {
-            int age;
-            std::string name;
-            std::string registrar; // Corrected member variable name
-        };
 
-        void addNode();
         void addData();
         void removeNode();
+        void removeNode(const NodePtr node);
+        void addNode(const Node &domainData);
         void printDomain(const Domain &domain); // Corrected parameter declaration
+        Domain loadData(int &age, std::string &name, std::string &registrar);
 
     private:
-
-        struct Node
-        {
-            Node *prev;
-            Domain data;
-            Node *next;
-        };
+        NodePtr head;
     };
 }
 
 #endif // !STAX_HPP
-
