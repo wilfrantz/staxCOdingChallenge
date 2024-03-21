@@ -56,7 +56,6 @@ namespace stax
                 domainData.name = data.second;
             else if (data.first == "registrar")
                 domainData.registrar = data.second;
-
         }
 
         return domainData;
@@ -66,6 +65,7 @@ namespace stax
     {
         NodePtr node = new Node;
         node->data = domainObject;
+        node->next = nullptr;
         return *node;
     }
 
@@ -85,9 +85,34 @@ namespace stax
             std::cout << "Age: " << domain.age << std::endl;
             std::cout << "Registrar: " << domain.registrar << std::endl;
 
+            // Debugging output to trace node connections
+            std::cout << "Next node address: " << current->next << std::endl;
+
             // Move to the next node
             current = current->next;
         }
         std::cout << std::endl;
     }
-}
+
+    // Function to insert a new node at the end of the list
+    // void insertAtBeginning(NodePtr node);
+    void Stax::insertAtBeginning(NodePtr node)
+    {
+        node->next = nullptr;
+        if (head == nullptr)
+        {
+            node->prev = nullptr;
+            head = node;
+            return;
+        }
+
+        NodePtr last = head;
+        while (last->next != nullptr)
+        {
+            last = last->next;
+        }
+
+        last->next = head;
+        node->prev = last;
+    }
+} // !namespace stax

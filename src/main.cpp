@@ -24,12 +24,8 @@ int main()
         node = list.createNode(data);
         list.insertAtBeginning(&node);
 
+        list.printList();
     }
-
-    list.printList();
-
-    // debug
-    // std::cout << data.name << data.age << data.registrar << std::endl;
 
     return (EXIT_SUCCESS);
 }

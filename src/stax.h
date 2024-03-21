@@ -27,6 +27,7 @@
 
 namespace stax
 {
+    // Application data
     struct Domain
     {
         int age = 0;
@@ -34,6 +35,7 @@ namespace stax
         std::string registrar;
     };
 
+    // Node
     struct Node
     {
         Node *prev;
@@ -41,15 +43,19 @@ namespace stax
         Node *next;
     };
 
-    typedef Node *NodePtr;
-    typedef Domain *DomainPtr;
+    // Type aliases for pointers
+    using NodePtr = Node *;
+    using DomainPtr = Domain *;
     class Stax
     {
     public:
+
+        // constructor
         Stax() : head(nullptr){};
 
         void printList();
         void removeNode(const NodePtr node);
+        void insertAtBeginning(NodePtr node);
         Node createNode(const Domain &domainObject);
         Domain loadData(const std::map<std::string, std::string> &data);
 
@@ -59,27 +65,9 @@ namespace stax
                 head->prev = node;
         }
 
-        // Function to insert a new node at the end of the list
-        inline void insertAtBeginning(NodePtr node)
-        {
-            node->next = nullptr;
-            if (head == nullptr)
-            {
-                node->prev = nullptr;
-                head = node;
-                return;
-            }
-
-            NodePtr last = head;
-            while (last->next != nullptr)
-            {
-                last = last->next;
-            }
-
-            last->next = head;
-            node->prev = last;
-        }
-
+#ifdef UNIT_TEST
+        friend class staxTest;
+#endif
     private:
         NodePtr head;
     };
