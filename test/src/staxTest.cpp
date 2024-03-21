@@ -3,21 +3,28 @@
 namespace stax
 {
 
-    void StaxTest::printListTest()
+    void StaxTest::insertAtBeginningMock(NodePtr node)
+    {
+        _staxObj->insertAtBeginning(node);
+    }
+
+    void StaxTest::printListMock()
     {
         _staxObj->printList();
     }
 
-    void StaxTest::removeNodeTest(const NodePtr node)
+    void StaxTest::removeNodeMock(const NodePtr node)
     {
         _staxObj->removeNode(node);
     }
-    Node StaxTest::createNodeTest(const Domain &domainObject)
+
+    Node StaxTest::createNodeMock(const Domain &domainObject)
     {
-        _staxObj->createNode(domainObject);
+        return _staxObj->createNode(domainObject);
     }
-    Domain StaxTest::loadDataTest(const std::map<std::string, std::string> &data)
+
+    Domain StaxTest::loadDataMock(const std::map<std::string, std::string> &data)
     {
-        _staxObj->loadData(data);
+        return _staxObj->loadData(data);
     }
 } // !namespace stax

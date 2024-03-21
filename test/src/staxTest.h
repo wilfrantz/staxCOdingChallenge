@@ -12,15 +12,15 @@ namespace stax
     class StaxTest
     {
     public:
-        void printListTest();
-        void removeNodeTest(const NodePtr node);
-        Node createNodeTest(const Domain &domainObject);
-        Domain loadDataTest(const std::map<std::string, std::string> &data);
+        void printListMock();
+        void insertAtBeginningMock(NodePtr node);
+        void removeNodeMock(const NodePtr node);
+        Node createNodeMock(const Domain &domainObject);
+        Domain loadDataMock(const std::map<std::string, std::string> &data);
 
     private:
         Stax *_staxObj;
     };
-
-}
+} // !namespace stax
 
 #endif // !STAXTEST_HPP
