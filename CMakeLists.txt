@@ -16,22 +16,26 @@ set(SOURCE_FILES
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-# # Include directories
-# target_include_directories(${PROJECT_NAME}
-#     PUBLIC
-#     ${CMAKE_CURRENT_SOURCE_DIR}/include
-# )
-
 # Set the build type to Debug if not explicitly set
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 # Optionally build and run tests
-option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_TESTS "Build tests" ON)
+# Link with GTest and GTest main if tests are enabled
 if(BUILD_TESTS)
     message(STATUS "Building tests ...")
     enable_testing()
-    add_subdirectory(test)
-    add_test(NAME ${PROJECT_NAME}_tests COMMAND test/${PROJECT_NAME}_test)
+
+    # Add GTest dependency
+    find_package(GTest REQUIRED)
+    include_directories(${GTEST_INCLUDE_DIRS})
+
+    # Add test executable
+    add_executable(${PROJECT_NAME}_test test/test_main.cpp test/your_test_file.cpp)
+    target_link_libraries(${PROJECT_NAME}_test ${PROJECT_NAME} GTest::GTest GTest::Main)
+
+    # Add test
+    add_test(NAME ${PROJECT_NAME}_tests COMMAND ${PROJECT_NAME}_test)
 endif()

@@ -1,29 +1,10 @@
 #ifndef STAX_HPP
 #define STAX_HPP
 
-#include <list>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <unistd.h>
 #include <iostream>
-#include <algorithm>
-#include <filesystem>
-#include <curl/curl.h>
-#include <cstdlib>
-#include <thread>
-#include <functional>
-#include <atomic>
-#include <condition_variable>
-#include <mutex>
-#include <chrono>
-#include <any>
-
-#include <iostream>
-#include <string>
 #include <map>
-#include <random>
+#include <string>
+
 
 namespace stax
 {
@@ -49,7 +30,6 @@ namespace stax
     class Stax
     {
     public:
-
         // constructor
         Stax() : head(nullptr){};
 
@@ -58,12 +38,6 @@ namespace stax
         void insertAtBeginning(NodePtr node);
         Node createNode(const Domain &domainObject);
         Domain loadData(const std::map<std::string, std::string> &data);
-
-        inline void insertAtEnd(NodePtr node)
-        {
-            if (head != nullptr)
-                head->prev = node;
-        }
 
 #ifdef UNIT_TEST
         friend class staxTest;
