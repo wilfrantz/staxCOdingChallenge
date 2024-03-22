@@ -23,6 +23,7 @@ endif()
 
 # Optionally build and run tests
 option(BUILD_TESTS "Build tests" ON)
+
 # Link with GTest and GTest main if tests are enabled
 if(BUILD_TESTS)
     message(STATUS "Building tests ...")
@@ -33,9 +34,9 @@ if(BUILD_TESTS)
     include_directories(${GTEST_INCLUDE_DIRS})
 
     # Add test executable
-    add_executable(${PROJECT_NAME}_test test/test_main.cpp test/your_test_file.cpp)
-    target_link_libraries(${PROJECT_NAME}_test ${PROJECT_NAME} GTest::GTest GTest::Main)
+    add_executable(${PROJECT_NAME}_test ${CMAKE_CURRENT_SOURCE_DIR}/test/src/UT_Stax_Test.cpp)
+    target_link_libraries(staxList_test GTest::GTest GTest::Main)
 
     # Add test
-    add_test(NAME ${PROJECT_NAME}_tests COMMAND ${PROJECT_NAME}_test)
+    add_test(NAME staxList_tests COMMAND staxList_test)
 endif()

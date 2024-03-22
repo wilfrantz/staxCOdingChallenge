@@ -1,31 +1,7 @@
 
 #include "stax.h"
 
-#include <list>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <unistd.h>
-#include <iostream>
-#include <algorithm>
-#include <filesystem>
-#include <curl/curl.h>
-#include <cstdlib>
-#include <thread>
-#include <functional>
-#include <atomic>
-#include <condition_variable>
-#include <mutex>
-#include <chrono>
-#include <any>
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <random>
-
-struct Node;
 namespace stax
 {
 
